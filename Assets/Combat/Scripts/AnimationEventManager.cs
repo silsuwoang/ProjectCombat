@@ -6,6 +6,5 @@ public class AnimationEventManager : MonoBehaviour
 {
     public void Test()
     {
-        Debug.Log("Test");
     }
 }

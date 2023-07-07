@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private Unit unit;
+    [System.Serializable]
+    public struct SkillSlot
+    {
+        public KeyCode KeyCode;
+        public string TargetSkillKey;
+    }
+    [SerializeField] private Unit receiver;
+    [SerializeField] private List<SkillSlot> skillSlots;
     
     private void Update()
     {
         MoveInput();
 
-        if (Input.GetMouseButtonDown(0))
+        foreach (var skillSlot in skillSlots)
         {
-            unit.CastSkill(0);
+            if (Input.GetKeyDown(skillSlot.KeyCode))
+            {
+                receiver.CastSkill(skillSlot.TargetSkillKey);
+            }
         }
     }
 
@@ -23,13 +34,25 @@ public class InputManager : MonoBehaviour
 
         if (dir.sqrMagnitude < 0.01f)
         {
-            // unit.AnimationController.SetParameter("Speed", 0f);
-            unit.AnimationController.SetApplyRootMotion(true);
+            receiver.Stop();
             return;
         }
         
-        // unit.AnimationController.SetParameter("Speed", 1f);
-        unit.AnimationController.SetApplyRootMotion(false);
-        unit.Move(dir);
+        receiver.Move(dir);
+    }
+
+    public bool GetMouseWorldPosition(out Vector3 pos)
+    {
+        var layer = ~(1 << LayerMask.NameToLayer("Unit"));
+        var mainCam = GameManager.Instance.MainCam;
+        var ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))
+        {
+            pos = hit.point;
+            return true;
+        }
+
+        pos = Vector3.zero;
+        return false;
     }
 }

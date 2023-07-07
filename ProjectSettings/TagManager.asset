@@ -16,8 +16,8 @@ TagManager:
   - 
   - TempCast
   - Walkable
-  - 
-  - 
+  - Unit
+  - HittableObject
   - 
   - 
   - 

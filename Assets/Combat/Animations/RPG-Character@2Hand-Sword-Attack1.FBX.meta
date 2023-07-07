@@ -701,7 +701,7 @@ ModelImporter:
     second: 2Hand-Sword
   - first:
       74: 7400000
-    second: 2Hand-Sword-Attack1
+    second: normal_attack
   - first:
       95: 9500000
     second: //RootNode
@@ -750,7 +750,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 2Hand-Sword-Attack1
+      name: normal_attack
       takeName: Take 001
       internalID: 7400000
       firstFrame: 0
@@ -775,7 +775,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.4217231
-        functionName: Action
+        functionName: OnAction
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
