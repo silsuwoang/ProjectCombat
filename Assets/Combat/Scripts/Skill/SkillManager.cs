@@ -9,7 +9,8 @@ public static class SkillManager
         return skillKey switch
         {
             "normal_attack" => new Skill_NormalAttack(),
-            "buff" => new Skill_Buff(),
+            "rage" => new Skill_Rage(),
+            "wave" => new Skill_Wave(),
             _ => new SkillBase()
         };
     }

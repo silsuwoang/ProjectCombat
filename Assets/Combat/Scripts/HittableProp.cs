@@ -25,6 +25,8 @@ public class HittableProp : MonoBehaviour
                 {
                     brokenObject.SetActive(true);
                 }
+
+                GetComponent<Collider>().enabled = false;
             }, null);
     }
 }

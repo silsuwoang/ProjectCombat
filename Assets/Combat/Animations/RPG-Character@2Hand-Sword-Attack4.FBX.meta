@@ -701,7 +701,7 @@ ModelImporter:
     second: Box001
   - first:
       74: 7400000
-    second: 2Hand-Sword-Attack4
+    second: wave
   - first:
       95: 9500000
     second: //RootNode
@@ -751,7 +751,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 2Hand-Sword-Attack4
+      name: wave
       takeName: Take 001
       internalID: 7400000
       firstFrame: 0

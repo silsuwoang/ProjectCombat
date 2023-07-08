@@ -4,37 +4,24 @@ using UnityEngine;
 
 public class Skill_NormalAttack : SkillBase
 {
-    public override void Init(string key)
+    public override IEnumerator Cast()
     {
-        base.Init(key);
-        Width = 1.7f;
-        Depth = 2.7f;
-        EffectTypes = new[] { EffectType.PhysicalDamage };
-        EffectValues = new[] { 1f };
-    }
+        yield return base.Cast();
 
-    public override IEnumerator Cast(Unit unit)
-    {
-        yield return base.Cast(unit);
-
-        unit.LookMouseWorldPoint();
-        unit.AnimationController.SetOnAction(() =>
+        User.LookMouseWorldPoint();
+        User.AnimationController.SetOnAction(() =>
         {
-            var hits = BattleManager.GetCollidedHealthComponent(unit, Collider, Width, Depth);
-            foreach (var hit in hits)
+            var targets = GetTargets(User.transform.position + 
+                                     (User.transform.rotation * new Vector3(0, 1, SkillData.Depth * 0.5f)));
+            foreach (var target in targets)
             {
-                BattleManager.SendEffect(unit, hit, new BattleManager.EffectData()
-                {
-                    EffectTypes = EffectTypes,
-                    EffectValues = EffectValues,
-                });
-                // BattleManager.Attack(unit, hit);
+                BattleManager.SendEffect(User, target, EffectData);
             }
         });
 
 
-        yield return Wait(unit.AnimationController);
+        yield return WaitUntilAnimationComplete(User.AnimationController);
         // done
-        unit.DoneCasting();
+        User.DoneCasting();
     }
 }

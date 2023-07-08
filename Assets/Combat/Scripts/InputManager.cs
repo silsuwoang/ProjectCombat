@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,12 +14,26 @@ public class InputManager : MonoBehaviour
         public string TargetSkillKey;
     }
     [SerializeField] private Unit receiver;
+    
+    [SerializeField] private SkillSlot baseSkillSlot;
     [SerializeField] private List<SkillSlot> skillSlots;
+
+    private Action _baseKeyEvent;
+    
+    public void Init()
+    {
+        ResetBaseKeyEvent();
+    }
     
     private void Update()
     {
         MoveInput();
 
+        if (Input.GetKeyDown(baseSkillSlot.KeyCode))
+        {
+            _baseKeyEvent?.Invoke();
+        }
+        
         foreach (var skillSlot in skillSlots)
         {
             if (Input.GetKeyDown(skillSlot.KeyCode))
@@ -54,5 +70,18 @@ public class InputManager : MonoBehaviour
 
         pos = Vector3.zero;
         return false;
+    }
+
+    public void SetBaseKeyEvent(Action onClick)
+    {
+        _baseKeyEvent = onClick;
+    }
+    
+    public void ResetBaseKeyEvent()
+    {
+        _baseKeyEvent = () =>
+        {
+            receiver.CastSkill(baseSkillSlot.TargetSkillKey);
+        };
     }
 }

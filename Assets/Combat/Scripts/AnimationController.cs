@@ -81,7 +81,7 @@ public class AnimationController : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).IsName(clipName);
     }
 
-    public void PlayAnimation(string clipName, Action<string> onFinished = null)
+    public void PlayAnimation(string clipName)
     {
         animator.Play(clipName);
         

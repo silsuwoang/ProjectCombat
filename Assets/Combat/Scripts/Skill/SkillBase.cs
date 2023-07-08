@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,62 +7,67 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class SkillBase
 {
-    public string SkillKey { get; private set; }
-    [SerializeField] protected string clipName;
+    protected SkillData SkillData;
+    public string SkillKey => SkillData.Key;
 
-    [SerializeField] protected bool canMove;
+    protected BattleManager.EffectData EffectData;
 
-    public enum Targeting
+    protected Unit User;
+    
+    public virtual void Init(string key, Unit user)
     {
-        Self,
+        SkillData = GameManager.Instance.TableContainer.GetTable<SkillTable>().GetData(key);
+        EffectData = new BattleManager.EffectData()
+        {
+            EffectTypes = SkillData.EffectTypes,
+            EffectValues = SkillData.EffectValues,
+        };
         
+        User = user;
     }
     
-
-
-    protected ColliderType Collider;
-    protected float Width;
-    protected float Depth;
-
-    protected EffectType[] EffectTypes;
-    protected float[] EffectValues;
-    
-    public virtual void Init(string key)
+    public virtual IEnumerator Cast()
     {
-        SkillKey = key;
-        clipName = key;
-        canMove = false;
-    }
-    
-    public virtual IEnumerator Cast(Unit unit)
-    {
-        unit.LockMovement(!canMove);
+        User.LockMovement(!SkillData.CanMove);
         
-        unit.AnimationController.SetAnimationSpeed(unit.AttackSpeed);
-        unit.AnimationController.PlayAnimation(clipName);
+        User.AnimationController.SetAnimationSpeed(User.AttackSpeed);
+        User.AnimationController.PlayAnimation(SkillData.ClipName);
 
         yield break;
     }
 
-    protected IEnumerator Wait(AnimationController animationController)
+    protected IEnumerator WaitUntilAnimationComplete(AnimationController animationController)
     {
-        // if (_clipLength < 0)
-        // {
-        //     // _clipLength = unit.AnimationController
-        //
-        // }
-
         var completes = false;
         animationController.SetOnComplete((clip) =>
         {
-            if (clip != clipName)
+            if (clip != SkillData.ClipName)
             {
                 return;
             }
             completes = true;
         });
         yield return new WaitUntil(() => completes);
-        // yield return new WaitUntil(() => animationController.IsPlayingAnimation(clipName));
-        // yield return new WaitWhile(() => animationController.IsPlayingAnimation(clipName));
+    }
+
+    protected List<HealthComponent> GetTargets(Vector3 center)
+    {
+        var result = new List<HealthComponent>();
+        switch (SkillData.Collider)
+        {
+            case ColliderType.Self:
+                result.Add(User.HealthComponent);
+                break;
+            case ColliderType.Box:
+                result = BattleManager.GetCollidedHealthComponent(center,
+                    new Vector3(SkillData.Width, 2, SkillData.Depth), 
+                    User.transform.rotation,
+                    new[] { User.transform });
+                break;
+            case ColliderType.Sphere:
+                result = BattleManager.GetCollidedHealthComponent(center, SkillData.Radius, new[] { User.transform });
+                break;
+        }
+        return result;
     }
 }
