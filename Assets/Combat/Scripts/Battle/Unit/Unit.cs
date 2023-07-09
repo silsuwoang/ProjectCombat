@@ -34,7 +34,11 @@ public class Unit : MonoBehaviour
     private bool _canMove;
     private bool _canCast;
     
-    private List<SkillBase> _skillBases = new List<SkillBase>();
+    [SerializeField] private bool setSpeedAutomatically;
+    private Vector3 _lastLocalPosition;
+
+
+    private Dictionary<string, SkillBase> _skillBases = new Dictionary<string, SkillBase>();
     private Coroutine _castingRoutine;
 
     private List<BuffBase> _applyingBuffs = new List<BuffBase>();
@@ -57,22 +61,23 @@ public class Unit : MonoBehaviour
     
     public void Init()
     {
-        animationController.SetMaxSpeed(baseMoveSpeed);
-        _canMove = true;
-        _canCast = true;
-
-        healthComponent.Init(MaxHealthPoint,OnHit,OnDead,
-            remainHP =>
-            {
-                
-            });
+        healthComponent.Init(MaxHealthPoint, OnHit, OnDead, OnChangedHP);
         
         foreach (var skillKey in skillKeys)
         {
+            if (_skillBases.ContainsKey(skillKey))
+            {
+                Debug.Log($"Error: The skill already added ({skillKey})");
+                continue;
+            }
             var newSkill = SkillManager.GetSkill(skillKey);
             newSkill.Init(skillKey, this);
-            _skillBases.Add(newSkill);
+            _skillBases.Add(skillKey,newSkill);
         }
+
+        _isMoving = false;
+        _canMove = true;
+        _canCast = true;
     }
 
     private void Update()
@@ -80,7 +85,15 @@ public class Unit : MonoBehaviour
         UpdateBuffsTime();
     }
 
-    public void Move(Vector3 dir)
+    private void FixedUpdate()
+    {
+        if (setSpeedAutomatically)
+        { 
+            SetSpeed();
+        }
+    }
+
+    public void Move(Vector3 dir, float delta)
     {
         if (!_canMove)
         {
@@ -93,12 +106,27 @@ public class Unit : MonoBehaviour
             AnimationController.SetApplyRootMotion(false);
         }
         
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), RotationSpeed * Time.deltaTime);
-        characterController.Move(transform.forward * (MoveSpeed * Time.deltaTime));
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), RotationSpeed * delta);
+        characterController.Move(transform.forward * (MoveSpeed * delta));
+    }
+
+    private void SetSpeed()
+    {
+        // 이동 속도 적용
+        var currentMasterPosition = transform.localPosition;
+        currentMasterPosition.y = 0f;
+        var speed = Vector3.Distance(_lastLocalPosition, currentMasterPosition);
+        AnimationController.SetParameter("Speed",speed / (MoveSpeed * Time.fixedDeltaTime));
+        _lastLocalPosition = currentMasterPosition;
     }
 
     public void Stop()
     {
+        if (!_isMoving)
+        {
+            return;
+        }
+        
         _isMoving = false;
         AnimationController.SetApplyRootMotion(true);
     }
@@ -129,30 +157,24 @@ public class Unit : MonoBehaviour
 
     public void CastSkill(string skillKey)
     {
-        var index = _skillBases.FindIndex(skill => skill.SkillKey == skillKey);
-        if (index < 0)
-        {   
-            Debug.Log($"Error: Can't find the skill ({skillKey})");
-            return;
-        }
-
-        CastSkill(index);
-    }
-    
-    public void CastSkill(int index)
-    {
         if (!_canCast)
         {
             return;
         }
-        
-        _castingRoutine = StartCoroutine(CastRoutine(index));
-    }
 
-    private IEnumerator CastRoutine(int index)
+        if (_skillBases.TryGetValue(skillKey, out var skill))
+        {
+            _castingRoutine = StartCoroutine(CastRoutine(skill));
+            return;
+        }
+        
+        Debug.Log($"Error: Can't find the skill ({skillKey})");
+    }
+    
+    private IEnumerator CastRoutine(SkillBase skill)
     {
         LockCasting(true);
-        yield return _skillBases[index].Cast();
+        yield return skill.Cast();
         LockCasting(false);
     }
 
@@ -236,10 +258,12 @@ public class Unit : MonoBehaviour
         {
             if (clip == "hit")
             {
+                // hit done
                 _canMove = true;
                 _canCast = true;
             }
         });
+        
         _canMove = false;
         _canCast = false;
         StopAllCoroutines();
@@ -252,5 +276,10 @@ public class Unit : MonoBehaviour
         _canMove = false;
         _canCast = false;
         StopAllCoroutines();
+    }
+
+    private void OnChangedHP(float remainHP)
+    {
+        
     }
 }

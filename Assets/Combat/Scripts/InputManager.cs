@@ -13,16 +13,17 @@ public class InputManager : MonoBehaviour
         public KeyCode KeyCode;
         public string TargetSkillKey;
     }
-
-    [SerializeField] private LayerMask ignoreLayers;
     
+    [SerializeField] private LayerMask ignoreLayers;    // 마우스 위치 체크 제외 레이어
     
     [SerializeField] private Unit receiver;
     
-    [SerializeField] private SkillSlot baseSkillSlot;
+    [SerializeField] private SkillSlot baseSkillSlot;   // Mouse 0 슬롯
     [SerializeField] private List<SkillSlot> skillSlots;
 
-    private Action _baseKeyEvent;
+    private Vector3 _inputDir;
+    
+    private Action _baseKeyEvent;   // baseSkillSlot 입력 이벤트
     
     public void Init()
     {
@@ -47,20 +48,36 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void MoveInput()
+    private void FixedUpdate()
     {
-        var dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        dir.Normalize();
-
-        if (dir.sqrMagnitude < 0.01f)
+        if (_inputDir.sqrMagnitude < 0.01f)
         {
             receiver.Stop();
             return;
         }
         
-        receiver.Move(dir);
+        receiver.Move(_inputDir, Time.fixedDeltaTime);
     }
 
+    private void MoveInput()
+    {
+        _inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        _inputDir.Normalize();
+    }
+    
+    public void SetBaseKeyEvent(Action onClick)
+    {
+        _baseKeyEvent = onClick;
+    }
+    
+    public void ResetBaseKeyEvent()
+    {
+        _baseKeyEvent = () =>
+        {
+            receiver.CastSkill(baseSkillSlot.TargetSkillKey);
+        };
+    }
+    
     public bool GetMouseWorldPosition(out Vector3 pos)
     {
         var layer = (1 << ignoreLayers);
@@ -74,18 +91,5 @@ public class InputManager : MonoBehaviour
 
         pos = Vector3.zero;
         return false;
-    }
-
-    public void SetBaseKeyEvent(Action onClick)
-    {
-        _baseKeyEvent = onClick;
-    }
-    
-    public void ResetBaseKeyEvent()
-    {
-        _baseKeyEvent = () =>
-        {
-            receiver.CastSkill(baseSkillSlot.TargetSkillKey);
-        };
     }
 }

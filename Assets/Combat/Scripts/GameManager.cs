@@ -16,8 +16,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PositionSelector positionSelector;
     public PositionSelector PositionSelector => positionSelector;
     
-    [SerializeField] private List<Unit> units;
-    
+    [SerializeField] private List<Unit> units = new List<Unit>();   // 테스트 용 유닛 리스트
     
     private void Start()
     {

@@ -6,8 +6,12 @@ public static class Utility
 {
     public static void DrawWireCube(Vector3 center, Vector3 size, Quaternion rotation, Color color, float duration)
     {
+        if (!Application.isEditor)
+        {
+            return;
+        }
+        
         var halfSize = size * 0.5f;
-
 
         var tfl = center + rotation * new Vector3(-halfSize.x, halfSize.y, halfSize.z);
         var tfr = center + rotation * new Vector3(halfSize.x, halfSize.y, halfSize.z);
@@ -36,6 +40,11 @@ public static class Utility
 
     public static void DrawSphere(Vector3 center, float radius, Color color, float duration)
     {
+        if (!Application.isEditor)
+        {
+            return;
+        }
+        
         var pos = new Vector3[][] { new Vector3[32], new Vector3[32], new Vector3[32] };
         for (var i = 0; i < 32; i++)
         {
@@ -48,20 +57,20 @@ public static class Utility
             pos[0][i] = new Vector3(center.x + value1, center.y, center.z + value2);
             pos[1][i] = new Vector3(center.x, center.y + value1, center.z + value2);
             pos[2][i] = new Vector3(center.x + value1, center.y + value2, center.z);
-        }
 
-        for (var i = 0; i < 32; i++)
-        {
-            if (i < 31)
+            if (i > 0)
             {
-                Debug.DrawLine(pos[0][i], pos[0][i + 1], color, duration);
-                Debug.DrawLine(pos[1][i], pos[1][i + 1], color, duration);
-                Debug.DrawLine(pos[2][i], pos[2][i + 1], color, duration);
-                continue;
+                Debug.DrawLine(pos[0][i], pos[0][i - 1], color, duration);
+                Debug.DrawLine(pos[1][i], pos[1][i - 1], color, duration);
+                Debug.DrawLine(pos[2][i], pos[2][i - 1], color, duration);
+
+                if (i >= 31)
+                {
+                    Debug.DrawLine(pos[0][i], pos[0][0], color, duration);
+                    Debug.DrawLine(pos[1][i], pos[1][0], color, duration);
+                    Debug.DrawLine(pos[2][i], pos[2][0], color, duration);
+                }
             }
-            Debug.DrawLine(pos[0][i], pos[0][0], color, duration);
-            Debug.DrawLine(pos[1][i], pos[1][0], color, duration);
-            Debug.DrawLine(pos[2][i], pos[2][0], color, duration);
         }
     }
 }

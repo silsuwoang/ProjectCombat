@@ -13,9 +13,9 @@ public enum ColliderType
 
 public enum EffectType
 {
-    PhysicalDamage,
-    Heal,
-    Buff,
+    PhysicalDamage, // 물리 데미지
+    Heal,           // 치료
+    Buff,           // (디)버프
 }
 
 public static class BattleManager
@@ -23,7 +23,6 @@ public static class BattleManager
     public struct EffectData
     {
         public Unit Sender;
-        public HealthComponent Receiver;
         public EffectType[] EffectTypes;
         public string[] EffectValues;
     }
@@ -33,8 +32,7 @@ public static class BattleManager
         public Unit Attacker;
         public float Damage;
     }
-
-
+    
     private static int _hittableLayer;
     
     public static void Init()
@@ -45,11 +43,12 @@ public static class BattleManager
     public static List<HealthComponent> GetBoxCollidedHealthComponent(Vector3 center, Vector3 size, Quaternion rotation, Transform[] exception)
     {
         var result = new List<HealthComponent>();
-        var halfSize = size * 0.5f;
 
+#if UNITY_EDITOR
         Utility.DrawWireCube(center, size, rotation, Color.green, 3);
+#endif
         
-        var hits = Physics.BoxCastAll(center, halfSize, Vector3.up, rotation, 0, _hittableLayer);
+        var hits = Physics.BoxCastAll(center, size * 0.5f, Vector3.up, rotation, 0, _hittableLayer);
         foreach (var hit in hits)
         {
             var hitTransform = hit.transform;
@@ -74,7 +73,9 @@ public static class BattleManager
     {
         var result = new List<HealthComponent>();
 
+#if UNITY_EDITOR
         Utility.DrawSphere(center, radius, Color.green, 3);
+#endif
         
         var hits = Physics.SphereCastAll(center, radius, Vector3.up, 0, _hittableLayer);
         foreach (var hit in hits)
@@ -115,8 +116,10 @@ public static class BattleManager
                         });
                     }
                     break;
+                
                 case EffectType.Heal:
                     break;
+                
                 case EffectType.Buff:
                     if (receiver.TryGetComponent<Unit>(out var unit))
                     {

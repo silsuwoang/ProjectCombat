@@ -23,7 +23,7 @@ public class TableContainer : ScriptableObject
 	public T GetTable<T>() where T:BaseTable
 	{
 		var key = typeof(T);
-		if (_tableDictionary.TryGetValue(key, out BaseTable value))
+		if (_tableDictionary.TryGetValue(key, out var value))
 		{
 			return value as T;
 		}

@@ -11,6 +11,7 @@ public class PositionSelector : MonoBehaviour
     {
         if (!_inputManager)
         {
+            // 캐싱
             _inputManager = GameManager.Instance.InputManager;
         }
 
@@ -22,6 +23,7 @@ public class PositionSelector : MonoBehaviour
 
     public void Enable(Vector3 size)
     {
+        // Todo: Box, Sphere 등 모양 추가
         transform.localScale = size;
         gameObject.SetActive(true);
     }

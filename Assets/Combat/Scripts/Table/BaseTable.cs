@@ -5,12 +5,8 @@ using UnityEngine;
 
 public class BaseTable : ScriptableObject
 {
-	// [SerializeField] private List<T> dataList = new List<T>();
-	// public List<T> DataList => dataList;
-
 	public virtual void Init()
 	{
-		
 	}
 }
 

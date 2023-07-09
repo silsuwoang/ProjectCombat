@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuffTable", menuName = "Scriptable Object/BuffTable", order = int.MaxValue)]
 public class BuffTable : BaseTable<BuffData>
 {
-    
 }
 
 [System.Serializable]
@@ -22,5 +21,4 @@ public struct BuffData
 
     [SerializeField] private float duration;
     public float Duration => duration;
-
 }

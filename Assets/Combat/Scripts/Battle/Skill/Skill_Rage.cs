@@ -1,22 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Skill_NormalAttack : SkillBase
+public class Skill_Rage : SkillBase
 {
     protected override IEnumerator Action()
     {
-        User.LookMouseWorldPoint();
         User.AnimationController.SetOnAction(() =>
         {
-            var targets = GetTargets(User.transform.position + 
-                                     (User.transform.rotation * new Vector3(0, 1, SkillData.Depth * 0.5f)));
+            var targets = GetTargets(User.transform.position);
             foreach (var target in targets)
             {
                 BattleManager.SendEffect(User, target, EffectData);
             }
         });
-
 
         yield return WaitUntilAnimationComplete(User.AnimationController);
         // done
