@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "TableContainer", menuName = "Scriptable Object/TableContainer", order = 0)]
 public class TableContainer : ScriptableObject

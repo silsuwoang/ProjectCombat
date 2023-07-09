@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BuffTable", menuName = "Scriptable Object/BuffTable", order = int.MaxValue)]

@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class AnimationController : MonoBehaviour
 {
@@ -29,6 +26,10 @@ public class AnimationController : MonoBehaviour
     public void SetApplyRootMotion(bool value)
     {
         animator.applyRootMotion = value;
+        if (!value)
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
 
     public void SetAnimationSpeed(float value)

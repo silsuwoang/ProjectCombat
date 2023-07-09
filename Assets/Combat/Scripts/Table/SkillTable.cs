@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillTable", menuName = "Scriptable Object/SkillTable", order = int.MaxValue)]
