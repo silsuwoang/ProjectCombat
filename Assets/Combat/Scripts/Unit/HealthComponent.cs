@@ -20,20 +20,6 @@ public class HealthComponent : MonoBehaviour
         _onDead = onDead;
         _onChangedHP = onChangedHP;
     }
-
-    public void Hit(BattleManager.DamageData damageData)
-    {
-        _currentHP -= damageData.Damage;
-        
-        _onHit?.Invoke(damageData.Damage);
-        _onChangedHP?.Invoke(_currentHP);
-
-        if (_currentHP <= 0)
-        {
-            _onDead?.Invoke();
-        }
-    }
-    
     
     public void Hit(BattleManager.AttackData attackData)
     {

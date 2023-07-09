@@ -13,6 +13,10 @@ public class InputManager : MonoBehaviour
         public KeyCode KeyCode;
         public string TargetSkillKey;
     }
+
+    [SerializeField] private LayerMask ignoreLayers;
+    
+    
     [SerializeField] private Unit receiver;
     
     [SerializeField] private SkillSlot baseSkillSlot;
@@ -59,7 +63,7 @@ public class InputManager : MonoBehaviour
 
     public bool GetMouseWorldPosition(out Vector3 pos)
     {
-        var layer = ~(1 << LayerMask.NameToLayer("Unit"));
+        var layer = (1 << ignoreLayers);
         var mainCam = GameManager.Instance.MainCam;
         var ray = mainCam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))

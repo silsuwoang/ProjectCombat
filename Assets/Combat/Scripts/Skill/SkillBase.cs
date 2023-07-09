@@ -7,6 +7,11 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class SkillBase
 {
+    public enum CastingType
+    {
+        Instant,
+        PositionSelect
+    }
     protected SkillData SkillData;
     public string SkillKey => SkillData.Key;
 
@@ -28,12 +33,56 @@ public class SkillBase
     
     public virtual IEnumerator Cast()
     {
-        User.LockMovement(!SkillData.CanMove);
+        switch (SkillData.CastingType)
+        {
+            case CastingType.Instant:
+                User.LockMovement(!SkillData.CanMove);
         
-        User.AnimationController.SetAnimationSpeed(User.AttackSpeed);
-        User.AnimationController.PlayAnimation(SkillData.ClipName);
+                User.AnimationController.SetAnimationSpeed(User.AttackSpeed);
+                User.AnimationController.PlayAnimation(SkillData.ClipName);
 
-        yield break;
+                yield return Action();
+                yield break;
+            
+            case CastingType.PositionSelect:
+                IEnumerator actionCoroutine = null;
+                switch (SkillData.Collider)
+                {
+                    case ColliderType.Box:
+                        GameManager.Instance.PositionSelector.Enable(new Vector3(SkillData.Width, 2, SkillData.Depth));
+                        break;
+                    case ColliderType.Sphere:
+                        var diameter = SkillData.Radius * 2;
+                        GameManager.Instance.PositionSelector.Enable(new Vector3(diameter, diameter, diameter));
+                        break;
+                }
+                GameManager.Instance.InputManager.SetBaseKeyEvent(() =>
+                {
+                    if (!GameManager.Instance.InputManager.GetMouseWorldPosition(out var pos))
+                    {
+                        return;
+                    }
+            
+                    User.LockMovement(!SkillData.CanMove);
+                    User.AnimationController.SetAnimationSpeed(User.AttackSpeed);
+                    User.AnimationController.PlayAnimation(SkillData.ClipName);
+            
+                    GameManager.Instance.InputManager.ResetBaseKeyEvent();
+                    GameManager.Instance.PositionSelector.Disable();
+                    actionCoroutine = Action();
+                });
+                yield return new WaitUntil(() => actionCoroutine != null);
+                yield return actionCoroutine;
+                yield break;
+
+            default:
+                yield break;
+        }
+    }
+
+    protected virtual IEnumerator Action()
+    {
+        yield break;   
     }
 
     protected IEnumerator WaitUntilAnimationComplete(AnimationController animationController)
@@ -59,13 +108,13 @@ public class SkillBase
                 result.Add(User.HealthComponent);
                 break;
             case ColliderType.Box:
-                result = BattleManager.GetCollidedHealthComponent(center,
+                result = BattleManager.GetBoxCollidedHealthComponent(center,
                     new Vector3(SkillData.Width, 2, SkillData.Depth), 
                     User.transform.rotation,
                     new[] { User.transform });
                 break;
             case ColliderType.Sphere:
-                result = BattleManager.GetCollidedHealthComponent(center, SkillData.Radius, new[] { User.transform });
+                result = BattleManager.GetSphereCollidedHealthComponent(center, SkillData.Radius, new[] { User.transform });
                 break;
         }
         return result;

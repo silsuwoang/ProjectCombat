@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Skill_Rage : SkillBase
 {
-    public override IEnumerator Cast()
+    protected override IEnumerator Action()
     {
-        yield return base.Cast();
-        
         User.AnimationController.SetOnAction(() =>
         {
             var targets = GetTargets(User.transform.position);

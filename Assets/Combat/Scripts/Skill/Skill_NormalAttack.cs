@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Skill_NormalAttack : SkillBase
 {
-    public override IEnumerator Cast()
+    protected override IEnumerator Action()
     {
-        yield return base.Cast();
-
         User.LookMouseWorldPoint();
         User.AnimationController.SetOnAction(() =>
         {

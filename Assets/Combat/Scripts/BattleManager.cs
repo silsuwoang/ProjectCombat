@@ -6,7 +6,6 @@ using UnityEngine;
 
 public enum ColliderType
 {
-    None,
     Self,
     Box,
     Sphere,
@@ -21,12 +20,6 @@ public enum EffectType
 
 public static class BattleManager
 {
-    public struct AttackData
-    {
-        public Unit Attacker;
-        public float Damage;
-    }
-    
     public struct EffectData
     {
         public Unit Sender;
@@ -35,11 +28,12 @@ public static class BattleManager
         public string[] EffectValues;
     }
     
-    public struct DamageData
+    public struct AttackData
     {
         public Unit Attacker;
         public float Damage;
     }
+
 
     private static int _hittableLayer;
     
@@ -48,39 +42,7 @@ public static class BattleManager
         _hittableLayer = 1 << LayerMask.NameToLayer("Unit") | 1 << LayerMask.NameToLayer("HittableObject");
     }
     
-    public static List<HealthComponent> GetCollidedHealthComponent(Unit unit, ColliderType colliderType, float width, float depth)
-    {
-        var result = new List<HealthComponent>();
-        var transform = unit.transform;
-        var size = new Vector3(width, 2, depth);
-        var halfSize = size * 0.5f;
-        var center = transform.position + transform.forward * (halfSize.z);
-        center.y += 1f;
-
-        Utility.DrawWireCube(center, size, transform.rotation, Color.green, 3);
-        
-        var hits = Physics.BoxCastAll(center, halfSize, transform.forward, transform.rotation, 0, _hittableLayer);
-        foreach (var hit in hits)
-        {
-            var hitTransform = hit.transform;
-            if (transform == hitTransform)
-            {
-                // self
-                continue;
-            }
-
-            if (!hitTransform.TryGetComponent<HealthComponent>(out var comp))
-            {
-                continue;
-            }
-
-            result.Add(comp);
-        }
-
-        return result;
-    }
-
-    public static List<HealthComponent> GetCollidedHealthComponent(Vector3 center, Vector3 size, Quaternion rotation, Transform[] exception)
+    public static List<HealthComponent> GetBoxCollidedHealthComponent(Vector3 center, Vector3 size, Quaternion rotation, Transform[] exception)
     {
         var result = new List<HealthComponent>();
         var halfSize = size * 0.5f;
@@ -108,7 +70,7 @@ public static class BattleManager
         return result;
     }
 
-    public static List<HealthComponent> GetCollidedHealthComponent(Vector3 center, float radius, Transform[] exception)
+    public static List<HealthComponent> GetSphereCollidedHealthComponent(Vector3 center, float radius, Transform[] exception)
     {
         var result = new List<HealthComponent>();
 
@@ -163,10 +125,7 @@ public static class BattleManager
                         unit.AddBuff(buff);
                     }
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
-            // receiver.Hit();
         }
     }
 }

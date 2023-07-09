@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillTable", menuName = "Scriptable Object/SkillTable", order = int.MaxValue)]
 public class SkillTable :BaseTable<SkillData>
 {
-
 }
 
 
@@ -20,6 +19,9 @@ public struct SkillData
     
     [SerializeField] private bool canMove;
     public bool CanMove => canMove;
+    
+    [SerializeField] private SkillBase.CastingType castingType;
+    public SkillBase.CastingType CastingType => castingType;
     
     [SerializeField] private ColliderType collider;
     public ColliderType Collider => collider;

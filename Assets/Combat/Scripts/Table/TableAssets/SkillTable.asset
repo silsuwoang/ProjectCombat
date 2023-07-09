@@ -16,6 +16,7 @@ MonoBehaviour:
   - key: normal_attack
     clipName: normal_attack
     canMove: 0
+    castingType: 0
     collider: 2
     width: 1.7
     depth: 2.7
@@ -26,6 +27,7 @@ MonoBehaviour:
   - key: rage
     clipName: rage
     canMove: 0
+    castingType: 0
     collider: 1
     width: 0
     depth: 0
@@ -36,10 +38,11 @@ MonoBehaviour:
   - key: wave
     clipName: wave
     canMove: 0
+    castingType: 1
     collider: 3
     width: 0
     depth: 0
     radius: 2
     effectTypes: 00000000
     effectValues:
-    - 1
+    - 2

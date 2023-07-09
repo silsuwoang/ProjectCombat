@@ -13,6 +13,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Camera mainCam;
     public Camera MainCam => mainCam;
 
+    [SerializeField] private PositionSelector positionSelector;
+    public PositionSelector PositionSelector => positionSelector;
+    
     [SerializeField] private List<Unit> units;
     
     

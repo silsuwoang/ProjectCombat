@@ -4,46 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75b82d03-36ed-470b-bf8f-e66c42ba4b7f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectCombat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectCombat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Animations/RPG-Character@2Hand-Sword-Attack4.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Animations/RPG-Character@2Hand-Sword-Attack4.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Animations/RPG-Character@Unarmed-Attack-L2.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Animations/RPG-Character@Unarmed-Attack-L2.FBX.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Animator/UnitBase.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Animator/UnitBase.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/AnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/AnimationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/BattleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/BattleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Effect.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Effect/EffectBase.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Effect/EffectBase.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Effect/EffectManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Effect/EffectManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/HittableProp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/HittableProp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/InputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/SkillBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/SkillBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/SkillManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/SkillManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_Buff.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_Rage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_Buff.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_Rage.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_NormalAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_NormalAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Unit/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Unit/Unit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Combat/Scripts/Utility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Combat/Scripts/Utility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
-    </list>
+    <list default="true" id="75b82d03-36ed-470b-bf8f-e66c42ba4b7f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a979684e1d42d/Table.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a979964e28a1f/Tables.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a979fb4e41265/Tables.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a97a3f4e51e18/Localize.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a97a684e5bc5c/Table.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a97ae24e79b4d/Tables.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a97c7c4eddccd/Ability.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/BNZ.64a97c894ee0f18/Table.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1332c534a8a44623b2e5cc943a0b790e157400/10/75ffc1b0/LayerMask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b8be267d809e4320a19ada90c7fbae111a000/4d/910fca2c/Physics.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b8be267d809e4320a19ada90c7fbae111a000/ce/6ee5eb5a/QueryTriggerInteraction.cs" root0="SKIP_HIGHLIGHTING" />
@@ -53,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/Buff/BuffBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/HittableProp.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/PositionSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/Skill/SkillBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/Skill/SkillManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Combat/Scripts/Skill/Skill_NormalAttack.cs" root0="FORCE_HIGHLIGHTING" />
@@ -75,22 +43,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\evan0\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\evan0\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\evan0\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\evan0\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\evan0\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\evan0\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="E:\UnityEngine\2021.3.0f1\Editor\Unity.exe" />
@@ -118,10 +86,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="14152">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="14152" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -141,7 +109,8 @@
       <workItem from="1688662337176" duration="40000" />
       <workItem from="1688662385942" duration="2936000" />
       <workItem from="1688705148244" duration="16251000" />
-      <workItem from="1688823881747" duration="15371000" />
+      <workItem from="1688823881747" duration="17309000" />
+      <workItem from="1688884712296" duration="3931000" />
     </task>
     <servers />
   </component>
