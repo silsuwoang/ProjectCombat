@@ -1,12 +1,10 @@
-##Controls 
+### Controls 
 
-Move: WASD
-
-NormalAttack: Mouse0
-
-Skills: Alpha 1 ~ 2
+    Move: WASD
+    NormalAttack: Mouse0
+    Skills: Alpha 1 ~ 2
 
 
-##Contact
+### Contact
 
 expx2@naver.com
